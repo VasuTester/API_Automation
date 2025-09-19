@@ -1,0 +1,27 @@
+# This tells Bitbucket Pipelines to use a pre-configured Docker image.
+# We're choosing an image that comes with Node.js version 18.
+image: node:18
+
+pipelines:
+  default:
+    - step:
+        name: 'Install, Test, and Report'
+        caches:
+          # Cache npm packages to speed up subsequent builds
+          - npm
+        script:
+          # Step 1: Install project dependencies safely
+          - echo "Installing dependencies..."
+          - npm ci
+
+          # Step 2: Install Playwright browsers and dependencies
+          - echo "Installing Playwright browsers..."
+          - npx playwright install --with-deps
+
+          # Step 3: Run the Playwright tests
+          - echo "Running Playwright API tests..."
+          - npx playwright test
+        artifacts:
+          # Step 4: Save the test report as an artifact
+          # This allows you to download and view the report after the pipeline finishes
+          - playwright-report/**

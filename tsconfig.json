@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    // This line ensures Playwright's types are loaded correctly
+    "types": ["@playwright/test"]
+  },
+  // This line ensures your test files are included
+  "include": ["test/**/*.ts"]
+}
